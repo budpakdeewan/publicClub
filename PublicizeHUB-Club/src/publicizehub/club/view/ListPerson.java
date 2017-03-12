@@ -109,6 +109,7 @@ public class ListPerson extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -149,7 +150,8 @@ public class ListPerson extends javax.swing.JFrame {
 
         String[] temp = new String[myArrList.size()];
         for (int i = 0; i < myArrList.size(); i++) {
-            temp[i] = "- " + myArrList.get(i);
+            temp[i] = (i+1)+". " + myArrList.get(i);
+            System.out.println("iii");
         }
         listPerson1.setListData(temp);
     }
