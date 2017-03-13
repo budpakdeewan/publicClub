@@ -109,6 +109,7 @@ public class ListPerson extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -122,10 +123,12 @@ public class ListPerson extends javax.swing.JFrame {
         Statement s = null;
         PreparedStatement ps = null;
         ResultSet result;
+        String evId = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_event" + "?user=root&password=root&characterEncoding=UTF-8");
-            ps = connect.prepareStatement("SELECT * FROM tb_personevent");
+            ps = connect.prepareStatement("SELECT * FROM tb_personevent where evId = ?");
+            ps.setString(1, "200");  //ให้แสดงชื่อตาม id 
             result = ps.executeQuery();
             while (result.next()) {
                 String temp = result.getString("stuName");
@@ -146,12 +149,13 @@ public class ListPerson extends javax.swing.JFrame {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
-        String[] temp = new String[myArrList.size()];
-        for (int i = 0; i < myArrList.size(); i++) {
-            temp[i] = "- " + myArrList.get(i);
-        }
-        listPerson1.setListData(temp);
+        
+        
+            String[] temp = new String[myArrList.size()];
+            for (int i = 0; i < myArrList.size(); i++) {
+                temp[i] = (i+1) + ". " + myArrList.get(i);
+            }
+            listPerson1.setListData(temp);
     }
     /**
      * @param args the command line arguments
